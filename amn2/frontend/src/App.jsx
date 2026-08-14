@@ -23,7 +23,7 @@ function App() {
     setAnswer("");
 
     try {
-      const response = await fetch(`${BACKEND_URL}/ask`, {
+      const response = await fetch("https://backend-bw2c.onrender.com/ask",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
