@@ -2,25 +2,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-
 app = FastAPI(
     title="Student Question API",
     description="A simple FastAPI backend for a React application",
     version="1.0.0",
 )
 
-
-# React runs on port 5173.
-# FastAPI runs on port 8000.
-# Since these are different origins, CORS permission is required.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://ask-my-notes-1-vz63.onrender.com",
-],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
