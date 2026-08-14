@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 
-const BACKEND_URL = "https://ask-my-notes-7cln.onrender.com";
+const BACKEND_URL = "https://render-1-6xy9.onrender.com";
 
 function App() {
   const [question, setQuestion] = useState("");
@@ -23,7 +23,7 @@ function App() {
     setAnswer("");
 
     try {
-      const response = await fetch("https://backend-bw2c.onrender.com/ask", {
+      const response = await fetch(`${BACKEND_URL}/ask`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
