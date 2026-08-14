@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 
+const BACKEND_URL = "https://ask-my-notes-7cln.onrender.com";
+
 function App() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -21,30 +23,30 @@ function App() {
     setAnswer("");
 
     try {
-      const response = await fetch("http://localhost:8000/ask", {
+      const response = await fetch("https://backend-bw2c.onrender.com/ask", {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
         },
-
         body: JSON.stringify({
           question: cleanedQuestion,
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Backend returned status ${response.status}`);
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.detail || `Backend returned status ${response.status}`
+        );
+      }
 
       setAnswer(data.answer);
     } catch (err) {
-      console.error(err);
+      console.error("Backend error:", err);
 
       setError(
-        "Unable to connect to the backend. Check whether the FastAPI container is running."
+        "Unable to connect to the backend. Please try again."
       );
     } finally {
       setLoading(false);
@@ -56,7 +58,9 @@ function App() {
       <section className="card">
         <h1>Ask My Notes</h1>
 
-        <p>Enter a question and send it to the FastAPI backend.</p>
+        <p>
+          Enter a question and send it to the FastAPI backend.
+        </p>
 
         <label htmlFor="question">Your question</label>
 
